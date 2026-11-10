@@ -1,4 +1,5 @@
 import { BriefcaseBusiness, CalendarDays, GraduationCap, LucideIcon, UserCheck, Users } from "lucide-react";
+import ExperienceList from "./ExperienceList";
 
 import { client } from "@/lib/sanity.client";
 import { experienceQuery } from "@/lib/sanity.queries";
@@ -125,9 +126,11 @@ export default async function Experience() {
               </div>
 
               <div className="space-y-5">
-                {professionalExperience.map((experience) => (
-                  <ExperienceCard key={experience._id} experience={experience} icon={BriefcaseBusiness} />
-                ))}
+                <ExperienceList>
+                  {professionalExperience.map((experience) => (
+                    <ExperienceCard key={experience._id} experience={experience} icon={BriefcaseBusiness} />
+                  ))}
+                </ExperienceList>
               </div>
             </div>
           )}
@@ -146,9 +149,11 @@ export default async function Experience() {
               </div>
 
               <div className="space-y-5">
-                {organizationalExperience.map((experience) => (
-                  <ExperienceCard key={experience._id} experience={experience} icon={experience.company.includes("Himpunan") ? UserCheck : Users} />
-                ))}
+                <ExperienceList>
+                  {organizationalExperience.map((experience) => (
+                    <ExperienceCard key={experience._id} experience={experience} icon={experience.company.includes("Himpunan") ? UserCheck : Users} />
+                  ))}
+                </ExperienceList>
               </div>
             </div>
           )}
