@@ -3,13 +3,9 @@ import Hero from "@/components/sections/Hero";
 import Experience from "@/components/sections/Experience";
 import Projects from "@/components/sections/Projects";
 import TechStack from "@/components/sections/TechStack";
+import Certifications from "@/components/sections/Certifications";
 
 const sections = [
-  {
-    id: "certifications",
-    title: "Certifications",
-    description: "Sertifikat dan pelatihan yang telah saya dapatkan.",
-  },
   {
     id: "contact",
     title: "Contact",
@@ -27,6 +23,7 @@ export default function Home() {
         <Experience />
         <Projects />
         <TechStack />
+        <Certifications />
 
         {/* Temporary Sections */}
         {sections.map((section) => (
