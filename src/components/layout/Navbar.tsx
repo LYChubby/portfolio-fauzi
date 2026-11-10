@@ -154,10 +154,10 @@ export default function Navbar() {
       <header className={`fixed inset-x-0 top-0 z-50 transition-all duration-300 ${isScrolled ? "glass-effect shadow-sm" : "border-b border-transparent bg-background/70 backdrop-blur-sm"}`}>
         <nav className="container-custom flex h-[76px] items-center justify-between" aria-label="Main navigation">
           {/* Logo */}
-          <Link href="#about" className="group flex items-center text-2xl font-extrabold tracking-tight" aria-label="Fauzi Taufik - Home">
+          <a href="#about" className="group flex items-center text-2xl font-extrabold tracking-tight" aria-label="Fauzi Taufik - Home">
             FT
             <span className="text-accent transition-transform group-hover:scale-125">.</span>
-          </Link>
+          </a>
 
           {/* Desktop Navigation */}
           <div className="hidden items-center gap-7 lg:flex">
