@@ -41,3 +41,15 @@ export const techStackQuery = groq`
     order
   }
 `;
+
+export const certificationQuery = groq`
+  *[_type == "certification"] | order(order asc, issueDate desc) {
+    _id,
+    name,
+    issuer,
+    issueDate,
+    credentialNumber,
+    credentialUrl,
+    order
+  }
+`;
