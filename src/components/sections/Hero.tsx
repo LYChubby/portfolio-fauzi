@@ -92,7 +92,7 @@ export default function Hero() {
               </h1>
 
               <h2 className="pt-2 text-2xl font-bold leading-tight sm:text-3xl xl:text-4xl">
-                Full Stack <span className="text-primary">Developer</span>
+                Freshgraduate | <span className="text-primary">Junior Software & Web Development</span>
               </h2>
             </div>
 

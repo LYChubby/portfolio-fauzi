@@ -7,7 +7,7 @@ export default function Footer() {
       <div className="container-custom flex flex-col items-center justify-between gap-4 py-7 sm:flex-row">
         <div className="text-center sm:text-left">
           Fauzi Taufik<span className="text-primary">.</span>
-          <p className="mt-1 text-xs text-muted"> Junior Full Stack Developer</p>
+          <p className="mt-1 text-xs text-muted"> Junior Software & Web Development</p>
         </div>
 
         <p className="text-center text-xs text-muted">© 2026 Fauzi Taufik. All rights reserved.</p>

@@ -1,6 +1,6 @@
 "use client";
 import { useEffect, useState } from "react";
-import { ArrowUpRight, Box, ChevronUp, ChevronDown, Code2, GitCommit, TrendingUp, Ticket } from "lucide-react";
+import { ArrowUpRight, Box, ChevronUp, ChevronDown, Code2, GitBranch, TrendingUp, Ticket } from "lucide-react";
 
 type Project = {
   title: string;
@@ -134,7 +134,7 @@ function ProjectCard({ project }: { project: Project }) {
                 rel="noopener noreferrer"
                 className="inline-flex items-center justify-center gap-2 rounded-lg border border-border px-4 py-2.5 text-sm font-semibold transition-all hover:border-primary hover:bg-primary/5 hover:text-primary"
               >
-                <GitCommit size={17} />
+                <GitBranch size={17} />
                 Repository
                 <ArrowUpRight size={15} />
               </a>
