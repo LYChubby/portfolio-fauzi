@@ -1,26 +1,286 @@
 @import "tailwindcss";
 
+/* ========================================
+   1. DESIGN TOKENS
+======================================== */
+
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  color-scheme: light;
+
+  --background: #f8fafc;
+  --foreground: #0f172a;
+
+  --surface: #ffffff;
+  --surface-secondary: #f1f5f9;
+
+  --primary: #2563eb;
+  --primary-hover: #1d4ed8;
+
+  --accent: #dc2626;
+  --accent-hover: #b91c1c;
+
+  --muted: #64748b;
+  --border: #e2e8f0;
+
+  --navbar-background: rgba(248, 250, 252, 0.85);
+
+  --grid-color: rgba(37, 99, 235, 0.07);
+
+  --radius-card: 16px;
+  --radius-button: 10px;
 }
+
+.dark {
+  color-scheme: dark;
+
+  --background: #0f172a;
+  --foreground: #f8fafc;
+
+  --surface: #172554;
+  --surface-secondary: #1e293b;
+
+  --primary: #3b82f6;
+  --primary-hover: #60a5fa;
+
+  --accent: #ef4444;
+  --accent-hover: #f87171;
+
+  --muted: #94a3b8;
+  --border: #334155;
+
+  --navbar-background: rgba(15, 23, 42, 0.85);
+
+  --grid-color: rgba(59, 130, 246, 0.09);
+}
+
+/* ========================================
+   2. TAILWIND THEME MAPPING
+======================================== */
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+
+  --color-surface: var(--surface);
+  --color-surface-secondary: var(--surface-secondary);
+
+  --color-primary: var(--primary);
+  --color-primary-hover: var(--primary-hover);
+
+  --color-accent: var(--accent);
+  --color-accent-hover: var(--accent-hover);
+
+  --color-muted: var(--muted);
+  --color-border: var(--border);
+
+  --font-sans: var(--font-inter);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+/* ========================================
+   3. BASE STYLES
+======================================== */
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 90px;
 }
 
 body {
-  background: var(--background);
+  background-color: var(--background);
   color: var(--foreground);
+
   font-family: Arial, Helvetica, sans-serif;
+
+  transition:
+    background-color 200ms ease,
+    color 200ms ease;
+}
+
+button,
+a {
+  -webkit-tap-highlight-color: transparent;
+}
+
+button {
+  cursor: pointer;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+::selection {
+  background: var(--primary);
+  color: #ffffff;
+}
+
+/* ========================================
+   4. REUSABLE LAYOUT
+======================================== */
+
+.container-custom {
+  width: 100%;
+  max-width: 1400px;
+
+  margin-inline: auto;
+  padding-inline: 24px;
+}
+
+.section-padding {
+  padding-block: 100px;
+}
+
+.section-heading {
+  font-size: clamp(1.8rem, 3vw, 2.5rem);
+  font-weight: 700;
+  letter-spacing: -0.04em;
+  line-height: 1.2;
+}
+
+.section-description {
+  color: var(--muted);
+  font-size: 1rem;
+  line-height: 1.7;
+}
+
+/* ========================================
+   5. MODERN TECH EFFECTS
+======================================== */
+
+.tech-grid {
+  background-image: linear-gradient(to right, var(--grid-color) 1px, transparent 1px), linear-gradient(to bottom, var(--grid-color) 1px, transparent 1px);
+
+  background-size: 48px 48px;
+}
+
+.text-gradient {
+  background: linear-gradient(100deg, #3b82f6 0%, #6366f1 50%, #dc2626 100%);
+
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.glass-effect {
+  background: var(--navbar-background);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border-bottom: 1px solid var(--border);
+}
+
+.card-base {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-card);
+
+  transition:
+    transform 200ms ease,
+    box-shadow 200ms ease,
+    border-color 200ms ease;
+}
+
+.card-base:hover {
+  transform: translateY(-4px);
+  border-color: var(--primary);
+  box-shadow: 0 12px 30px rgba(15, 23, 42, 0.08);
+}
+
+/* ========================================
+   6. BUTTON SYSTEM
+======================================== */
+
+.btn-primary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+
+  padding: 12px 24px;
+
+  background: var(--accent);
+  color: #ffffff;
+
+  border-radius: var(--radius-button);
+  font-weight: 600;
+
+  transition:
+    background-color 200ms ease,
+    transform 200ms ease;
+}
+
+.btn-primary:hover {
+  background: var(--accent-hover);
+  transform: translateY(-2px);
+}
+
+.btn-outline {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+
+  padding: 12px 24px;
+
+  border: 1px solid var(--border);
+  border-radius: var(--radius-button);
+
+  color: var(--foreground);
+  font-weight: 600;
+
+  transition: all 200ms ease;
+}
+
+.btn-outline:hover {
+  border-color: var(--primary);
+  color: var(--primary);
+}
+
+/* ========================================
+   7. SCROLLBAR
+======================================== */
+
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--background);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--muted);
+  border-radius: 20px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--primary);
+}
+
+/* ========================================
+   8. RESPONSIVE
+======================================== */
+
+@media (max-width: 768px) {
+  .container-custom {
+    padding-inline: 20px;
+  }
+
+  .section-padding {
+    padding-block: 72px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    scroll-behavior: auto !important;
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
 }
