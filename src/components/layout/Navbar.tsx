@@ -179,7 +179,7 @@ export default function Navbar() {
           <div className="hidden items-center gap-3 lg:flex">
             <ThemeToggle />
 
-            <a href="/CV-Fauzi-Taufik.pdf" download className="btn-primary text-sm">
+            <a href="/CV_FauziTaufik_Programmer.pdf" download className="btn-primary text-sm">
               Download CV
               <Download size={16} />
             </a>
@@ -252,7 +252,7 @@ export default function Navbar() {
 
           {/* Drawer Footer */}
           <div className="border-t border-border pt-6">
-            <a href="/CV-Fauzi-Taufik.pdf" download onClick={closeMenu} className="btn-primary w-full">
+            <a href="/CV_FauziTaufik_Programmer.pdf" download onClick={closeMenu} className="btn-primary w-full">
               Download CV
               <Download size={17} />
             </a>
