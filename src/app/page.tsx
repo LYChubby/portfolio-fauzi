@@ -1,4 +1,5 @@
 import Navbar from "@/components/layout/Navbar";
+import Hero from "@/components/sections/Hero";
 
 const sections = [
   {
@@ -19,7 +20,7 @@ const sections = [
   {
     id: "certifications",
     title: "Certifications",
-    description: "Sertifikat dan penghargaan yang telah saya raih.",
+    description: "Sertifikat dan pelatihan yang telah saya dapatkan.",
   },
   {
     id: "contact",
@@ -34,25 +35,7 @@ export default function Home() {
       <Navbar />
 
       <main>
-        {/* Temporary Hero / About */}
-        <section id="about" className="tech-grid flex min-h-screen scroll-mt-24 items-center">
-          <div className="container-custom py-32">
-            <div className="max-w-3xl space-y-6">
-              <span className="text-sm font-semibold uppercase tracking-widest text-primary">Welcome to My Portfolio</span>
-
-              <h1 className="text-5xl font-extrabold tracking-tight md:text-7xl">
-                Fauzi Taufik
-                <span className="text-accent">.</span>
-              </h1>
-
-              <h2 className="text-3xl font-bold md:text-5xl">
-                Full Stack <span className="text-gradient">Developer</span>
-              </h2>
-
-              <p className="section-description max-w-xl">Membangun aplikasi web modern dan solusi digital melalui teknologi frontend, backend, dan database.</p>
-            </div>
-          </div>
-        </section>
+        <Hero />
 
         {/* Temporary Sections */}
         {sections.map((section) => (
