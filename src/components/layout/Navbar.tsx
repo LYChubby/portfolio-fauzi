@@ -30,6 +30,11 @@ const navigation = [
     id: "tech-stack",
   },
   {
+    label: "Certifications",
+    href: "#certifications",
+    id: "certifications",
+  },
+  {
     label: "Contact",
     href: "#contact",
     id: "contact",
