@@ -1,12 +1,8 @@
 import Navbar from "@/components/layout/Navbar";
 import Hero from "@/components/sections/Hero";
+import Experience from "@/components/sections/Experience";
 
 const sections = [
-  {
-    id: "experience",
-    title: "Experience",
-    description: "Perjalanan karier dan pengalaman profesional saya.",
-  },
   {
     id: "projects",
     title: "Featured Projects",
@@ -36,6 +32,7 @@ export default function Home() {
 
       <main>
         <Hero />
+        <Experience />
 
         {/* Temporary Sections */}
         {sections.map((section) => (
