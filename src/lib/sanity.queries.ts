@@ -31,3 +31,13 @@ export const projectQuery = groq`
     order
   }
 `;
+
+export const techStackQuery = groq`
+  *[_type == "techStack"] | order(order asc) {
+    _id,
+    category,
+    description,
+    technologies,
+    order
+  }
+`;
