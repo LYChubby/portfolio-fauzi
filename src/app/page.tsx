@@ -2,13 +2,9 @@ import Navbar from "@/components/layout/Navbar";
 import Hero from "@/components/sections/Hero";
 import Experience from "@/components/sections/Experience";
 import Projects from "@/components/sections/Projects";
+import TechStack from "@/components/sections/TechStack";
 
 const sections = [
-  {
-    id: "tech-stack",
-    title: "Tech Stack",
-    description: "Teknologi yang saya gunakan untuk membangun solusi digital.",
-  },
   {
     id: "certifications",
     title: "Certifications",
@@ -30,6 +26,7 @@ export default function Home() {
         <Hero />
         <Experience />
         <Projects />
+        <TechStack />
 
         {/* Temporary Sections */}
         {sections.map((section) => (
