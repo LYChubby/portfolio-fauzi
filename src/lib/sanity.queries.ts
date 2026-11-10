@@ -15,3 +15,19 @@ export const experienceQuery = groq`
     order
   }
 `;
+
+export const projectQuery = groq`
+  *[_type == "project"] | order(featured desc, order asc) {
+    _id,
+    title,
+    slug,
+    category,
+    description,
+    "thumbnailUrl": thumbnail.asset->url,
+    technologies,
+    githubUrl,
+    demoUrl,
+    featured,
+    order
+  }
+`;
