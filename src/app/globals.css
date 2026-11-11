@@ -131,6 +131,10 @@ a {
   padding-inline: 24px;
 }
 
+section[id] {
+  scroll-margin-top: 6rem;
+}
+
 .section-padding {
   padding-block: 100px;
 }

@@ -1,9 +1,6 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-
-import Link from "next/link";
-
 import { ArrowUpRight, Download, Menu, X } from "lucide-react";
 
 import ThemeToggle from "@/components/ui/ThemeToggle";
@@ -52,6 +49,21 @@ export default function Navbar({ cvUrl }: NavbarProps) {
 
   const menuRef = useRef<HTMLElement>(null);
   const menuButtonRef = useRef<HTMLButtonElement>(null);
+
+  // Handle navigation without changing the URL
+  const handleNavigation = (sectionId: string) => {
+    const section = document.getElementById(sectionId);
+
+    if (!section) return;
+
+    section.scrollIntoView({
+      behavior: "smooth",
+      block: "start",
+    });
+
+    setActiveSection(sectionId);
+    setIsMenuOpen(false);
+  };
 
   // Detect navbar scroll state
   useEffect(() => {
@@ -158,24 +170,25 @@ export default function Navbar({ cvUrl }: NavbarProps) {
       <header className={`fixed inset-x-0 top-0 z-50 transition-all duration-300 ${isScrolled ? "glass-effect shadow-sm" : "border-b border-transparent bg-background/70 backdrop-blur-sm"}`}>
         <nav className="container-custom flex h-[76px] items-center justify-between" aria-label="Main navigation">
           {/* Logo */}
-          <a href="#about" className="group flex items-center text-2xl font-extrabold tracking-tight" aria-label="Fauzi Taufik - Home">
+          <button type="button" onClick={() => handleNavigation("about")} className="group flex items-center text-2xl font-extrabold tracking-tight" aria-label="Fauzi Taufik - Home">
             FT
             <span className="text-accent transition-transform group-hover:scale-125">.</span>
-          </a>
+          </button>
 
           {/* Desktop Navigation */}
           <div className="hidden items-center gap-7 lg:flex">
             {navigation.map((item) => (
-              <a
+              <button
                 key={item.id}
-                href={item.href}
+                type="button"
+                onClick={() => handleNavigation(item.id)}
                 aria-current={activeSection === item.id ? "location" : undefined}
                 className={`relative py-2 text-sm font-medium transition-colors duration-200 ${activeSection === item.id ? "text-primary" : "text-muted hover:text-foreground"}`}
               >
                 {item.label}
 
                 <span className={`absolute -bottom-1 left-0 h-[2px] rounded-full bg-accent transition-all duration-300 ${activeSection === item.id ? "w-full" : "w-0"}`} />
-              </a>
+              </button>
             ))}
           </div>
 
@@ -227,9 +240,9 @@ export default function Navbar({ cvUrl }: NavbarProps) {
         >
           {/* Drawer Header */}
           <div className="flex items-center justify-between border-b border-border pb-6">
-            <Link href="#about" onClick={closeMenu} className="text-2xl font-extrabold">
+            <button type="button" onClick={() => handleNavigation("about")} className="text-2xl font-extrabold" aria-label="Fauzi Taufik - Home">
               FT<span className="text-accent">.</span>
-            </Link>
+            </button>
 
             <button type="button" onClick={closeMenu} aria-label="Tutup menu navigasi" className="flex h-10 w-10 items-center justify-center rounded-full border border-border transition-colors hover:text-accent">
               <X size={20} />
@@ -239,12 +252,14 @@ export default function Navbar({ cvUrl }: NavbarProps) {
           {/* Drawer Navigation */}
           <div className="flex flex-1 flex-col gap-2 py-8">
             {navigation.map((item, index) => (
-              <a
+              <button
                 key={item.id}
-                href={item.href}
-                onClick={closeMenu}
+                type="button"
+                onClick={() => handleNavigation(item.id)}
                 aria-current={activeSection === item.id ? "location" : undefined}
-                className={`flex items-center justify-between rounded-lg px-4 py-4 text-base font-semibold transition-colors ${activeSection === item.id ? "bg-primary/10 text-primary" : "text-foreground hover:bg-surface-secondary"}`}
+                className={`flex items-center justify-between rounded-lg px-4 py-4 text-left text-base font-semibold transition-colors ${
+                  activeSection === item.id ? "bg-primary/10 text-primary" : "text-foreground hover:bg-surface-secondary"
+                }`}
               >
                 <span>
                   <span className="mr-3 text-xs text-muted">0{index + 1}</span>
@@ -252,7 +267,7 @@ export default function Navbar({ cvUrl }: NavbarProps) {
                 </span>
 
                 <ArrowUpRight size={17} />
-              </a>
+              </button>
             ))}
           </div>
 
