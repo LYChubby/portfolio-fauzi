@@ -1,61 +1,21 @@
-import { ArrowDown, ArrowUpRight, Code2, Database, Smartphone, Layers3, UserRound, LucideIcon } from "lucide-react";
+import { ArrowDown, ArrowUpRight, Download, Code2, Database, Smartphone, Layers3 } from "lucide-react";
 import Image from "next/image";
 
-{
-  /* Jika ingin menambah floating label tanpa atur posisi; */
-}
-/*
-type FloatingLabelItem = {
-  icon: LucideIcon;
-  iconColor: string;
-  iconBg: string;
-  title: string;
-  subtitle: string;
-};
+import { client } from "@/lib/sanity.client";
+import { siteSettingsQuery } from "@/lib/sanity.queries";
+import type { SiteSettings } from "@/types/siteSettings";
 
-const labelsLeft: FloatingLabelItem[] = [
-  {
-    icon: Code2,
-    iconColor: "text-primary",
-    iconBg: "bg-primary/10",
-    title: "Web Development",
-    subtitle: "Frontend & Backend",
-  },
-];
+export default async function Hero() {
+  const settings: SiteSettings | null = await client.fetch(siteSettingsQuery, {}, { next: { revalidate: 60 } });
 
-const labelsRight: FloatingLabelItem[] = [
-  {
-    icon: Database,
-    iconColor: "text-accent",
-    iconBg: "bg-accent/10",
-    title: "Database",
-    subtitle: "Data Management",
-  },
-  {
-    icon: Smartphone,
-    iconColor: "text-primary",
-    iconBg: "bg-primary/10",
-    title: "Mobile Development",
-    subtitle: "iOS & Android",
-  },
-];
+  if (!settings) {
+    return (
+      <section id="about" className="flex min-h-screen items-center justify-center bg-background px-6">
+        <p className="text-sm text-muted">Informasi profil belum tersedia.</p>
+      </section>
+    );
+  }
 
-function FloatingLabel({ icon: Icon, iconColor, iconBg, title, subtitle }: FloatingLabelItem) {
-  return (
-    <div className="flex items-center gap-3 rounded-xl border border-border bg-surface/90 p-4 shadow-xl backdrop-blur-md">
-      <div className={`flex h-10 w-10 shrink-0 items-center justify-center rounded-lg ${iconBg}`}>
-        <Icon size={21} className={iconColor} />
-      </div>
-      <div>
-        <p className="text-xs font-bold">{title}</p>
-        <p className="text-[11px] text-muted">{subtitle}</p>
-      </div>
-    </div>
-  );
-}
-  */
-
-export default function Hero() {
   return (
     <section id="about" className="relative isolate flex min-h-screen scroll-mt-20 items-center overflow-hidden bg-background pt-28 pb-16">
       {/* Background Decorations */}
@@ -85,28 +45,27 @@ export default function Hero() {
               <p className="text-lg font-medium text-muted sm:text-xl">Halo, saya</p>
 
               <h1 className="text-5xl font-extrabold leading-[1.1] tracking-tight sm:text-6xl xl:text-7xl">
-                Fauzi
+                {settings.name.split(" ").slice(0, -1).join(" ") || settings.name}
                 <br />
-                <span className="text-gradient">Taufik</span>
-                <span className="text-accent">.</span>
+                <span className="text-gradient">{settings.name.split(" ").slice(-1).join("")}</span>
               </h1>
 
               <h2 className="pt-2 text-2xl font-bold leading-tight sm:text-3xl xl:text-4xl">
-                Freshgraduate | <span className="text-primary">Junior Software & Web Development</span>
+                <span className="text-primary">{settings.role}</span>
               </h2>
             </div>
 
             {/* Description */}
-            <p className="max-w-xl text-base leading-8 text-muted sm:text-lg">
-              Berfokus pada pengembangan aplikasi web dan mobile, mulai dari membangun antarmuka frontend, mengembangkan backend, hingga mengelola database untuk menghasilkan solusi digital yang fungsional dan berkelanjutan.
-            </p>
+            <p className="max-w-xl text-base leading-8 text-muted sm:text-lg">{settings.shortDescription}</p>
 
             {/* CTA Buttons */}
             <div className="flex flex-wrap items-center gap-4 pt-2">
-              <a href="/CV_FauziTaufik_Programmer.pdf" download className="btn-primary group">
-                Download CV
-                <ArrowDown size={18} className="transition-transform group-hover:translate-y-1" />
-              </a>
+              {settings.cvUrl && (
+                <a href={settings.cvUrl} target="_blank" rel="noopener noreferrer" className="btn-primary group">
+                  Download CV
+                  <Download size={18} className="transition-transform group-hover:translate-y-1" />
+                </a>
+              )}
 
               <a href="#contact" className="btn-outline group">
                 Hubungi Saya
@@ -143,27 +102,22 @@ export default function Hero() {
 
               {/* Profile Frame */}
               <div className="relative aspect-[4/5] overflow-hidden rounded-[1.75rem] border border-border bg-surface shadow-2xl">
-                {/* Placeholder Profile */}
-                {/* <div className="absolute inset-0 flex flex-col items-center justify-center gap-5 bg-gradient-to-br from-primary/10 via-surface to-accent/10">
-                  <div className="flex h-36 w-36 items-center justify-center rounded-full border border-primary/30 bg-primary/10 shadow-xl shadow-primary/10 sm:h-44 sm:w-44">
-                    <UserRound size={100} strokeWidth={1} className="text-primary sm:h-32 sm:w-32" />
-                  </div>
-
-                  <div className="space-y-2 text-center">
-                    <p className="text-lg font-bold">Fauzi Taufik</p>
-
-                    <p className="text-sm text-muted">Profile Photo</p>
-                  </div>
-                </div> */}
-
+                {/* Profile Image */}
                 <div className="absolute inset-0 overflow-hidden bg-gradient-to-br from-primary/10 via-surface to-accent/10">
-                  <div className="absolute inset-3 sm:inset-4">
-                    <Image src="/images/profile.png" alt="Fauzi Taufik" fill sizes="(min-width: 640px) 50vw, 100vw" className="rounded-2xl object-cover" priority />
-                  </div>
+                  {settings.profileImageUrl ? (
+                    <div className="absolute inset-3 sm:inset-4">
+                      <Image src={settings.profileImageUrl} alt={settings.name} fill sizes="(min-width: 640px) 50vw, 100vw" className="rounded-2xl object-cover" priority />
+                    </div>
+                  ) : (
+                    <div className="absolute inset-0 flex items-center justify-center">
+                      <Code2 size={100} strokeWidth={1} className="text-primary/40" />
+                    </div>
+                  )}
 
                   <div className="absolute inset-x-0 bottom-0 space-y-1 p-5 text-center text-white">
-                    <p className="text-lg font-bold drop-shadow">Fauzi Taufik</p>
-                    <p className="text-sm text-white/80 drop-shadow">Profile Photo</p>
+                    <p className="text-lg font-bold drop-shadow">{settings.name}</p>
+
+                    <p className="text-sm text-white/80 drop-shadow">{settings.role}</p>
                   </div>
                 </div>
 
@@ -176,18 +130,6 @@ export default function Hero() {
                 <div className="absolute bottom-5 left-5 h-12 w-12 rounded-bl-2xl border-b-2 border-l-2 border-accent/50" />
               </div>
 
-              {/* Gunakan Floating Labels ini jika ingin menambah labels tanpa atur manual*/}
-              {/* <div className="pointer-events-none absolute -left-8 inset-y-0 hidden flex-col justify-around gap-4 sm:flex">
-                {labelsLeft.map((item) => (
-                  <FloatingLabel key={item.title} {...item} />
-                ))}
-              </div>
-              <div className="pointer-events-none absolute -right-5 inset-y-0 hidden flex-col justify-around gap-4 sm:flex">
-                {labelsRight.map((item) => (
-                  <FloatingLabel key={item.title} {...item} />
-                ))}
-              </div>*/}
-
               {/* Floating Tech Label */}
               <div className="absolute -left-8 top-1/4 hidden items-center gap-3 rounded-xl border border-border bg-surface/90 p-4 shadow-xl backdrop-blur-md sm:flex">
                 <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-primary/10">
@@ -196,12 +138,11 @@ export default function Hero() {
 
                 <div>
                   <p className="text-xs font-bold">Web Development</p>
-
                   <p className="text-[11px] text-muted">Frontend & Backend</p>
                 </div>
               </div>
 
-              {/* Floating Database Label */}
+              {/* Floating Mobile Label */}
               <div className="absolute -right-5 bottom-1/4 hidden items-center gap-3 rounded-xl border border-border bg-surface/90 p-4 shadow-xl backdrop-blur-md sm:flex">
                 <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-accent/10">
                   <Smartphone size={21} className="text-accent" />
@@ -209,7 +150,6 @@ export default function Hero() {
 
                 <div>
                   <p className="text-xs font-bold">Mobile Development</p>
-
                   <p className="text-[11px] text-muted">Android</p>
                 </div>
               </div>

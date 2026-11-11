@@ -41,7 +41,11 @@ const navigation = [
   },
 ];
 
-export default function Navbar() {
+type NavbarProps = {
+  cvUrl?: string;
+};
+
+export default function Navbar({ cvUrl }: NavbarProps) {
   const [isScrolled, setIsScrolled] = useState(false);
   const [activeSection, setActiveSection] = useState("about");
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -179,10 +183,12 @@ export default function Navbar() {
           <div className="hidden items-center gap-3 lg:flex">
             <ThemeToggle />
 
-            <a href="/CV_FauziTaufik_Programmer.pdf" download className="btn-primary text-sm">
-              Download CV
-              <Download size={16} />
-            </a>
+            {cvUrl && (
+              <a href={cvUrl} target="_blank" rel="noopener noreferrer" className="btn-primary text-sm">
+                Download CV
+                <Download size={16} />
+              </a>
+            )}
           </div>
 
           {/* Mobile Actions */}
@@ -252,10 +258,12 @@ export default function Navbar() {
 
           {/* Drawer Footer */}
           <div className="border-t border-border pt-6">
-            <a href="/CV_FauziTaufik_Programmer.pdf" download onClick={closeMenu} className="btn-primary w-full">
-              Download CV
-              <Download size={17} />
-            </a>
+            {cvUrl && (
+              <a href={cvUrl} target="_blank" rel="noopener noreferrer" onClick={closeMenu} className="btn-primary w-full">
+                Download CV
+                <Download size={17} />
+              </a>
+            )}
 
             <p className="mt-5 text-center text-xs text-muted">© 2026 Fauzi Taufik</p>
           </div>

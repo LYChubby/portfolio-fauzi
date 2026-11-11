@@ -1,21 +1,27 @@
 import { ArrowUpRight, GitBranch, PhoneCall, Mail } from "lucide-react";
 
-const contactEmail = "f4uzi345@gmail.com";
+import { client } from "@/lib/sanity.client";
+import { siteSettingsQuery } from "@/lib/sanity.queries";
+import type { SiteSettings } from "@/types/siteSettings";
 
-const socialLinks = [
-  {
-    label: "GitHub",
-    href: "https://github.com/LYChubby",
-    icon: GitBranch,
-  },
-  {
-    label: "Whatsapp",
-    href: "https://wa.me/6281290539270",
-    icon: PhoneCall,
-  },
-];
+export default async function Contact() {
+  const settings: SiteSettings | null = await client.fetch(siteSettingsQuery, {}, { next: { revalidate: 60 } });
 
-export default function Contact() {
+  const contactEmail = settings?.email;
+
+  const socialLinks = [
+    {
+      label: "GitHub",
+      href: settings?.githubUrl,
+      icon: GitBranch,
+    },
+    {
+      label: "WhatsApp",
+      href: settings?.whatsappUrl,
+      icon: PhoneCall,
+    },
+  ].filter((social) => social.href);
+
   return (
     <section id="contact" className="section-padding scroll-mt-24 border-t border-border">
       <div className="container-custom">
@@ -34,27 +40,25 @@ export default function Contact() {
             </a>
           )}
 
-          {socialLinks.some((social) => social.href) && (
+          {socialLinks.length > 0 && (
             <div className="mt-10 flex flex-wrap items-center justify-center gap-3">
-              {socialLinks
-                .filter((social) => social.href)
-                .map((social) => {
-                  const Icon = social.icon;
+              {socialLinks.map((social) => {
+                const Icon = social.icon;
 
-                  return (
-                    <a
-                      key={social.label}
-                      href={social.href}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      aria-label={social.label}
-                      className="inline-flex items-center gap-2 rounded-lg border border-border px-4 py-2.5 text-sm font-medium text-foreground transition-colors hover:border-primary hover:text-primary"
-                    >
-                      <Icon size={17} />
-                      {social.label}
-                    </a>
-                  );
-                })}
+                return (
+                  <a
+                    key={social.label}
+                    href={social.href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    aria-label={social.label}
+                    className="inline-flex items-center gap-2 rounded-lg border border-border px-4 py-2.5 text-sm font-medium text-foreground transition-colors hover:border-primary hover:text-primary"
+                  >
+                    <Icon size={17} />
+                    {social.label}
+                  </a>
+                );
+              })}
             </div>
           )}
         </div>

@@ -53,3 +53,18 @@ export const certificationQuery = groq`
     order
   }
 `;
+
+export const siteSettingsQuery = groq`
+  *[_type == "siteSettings"][0] {
+    _id,
+    name,
+    role,
+    shortDescription,
+    aboutDescription,
+    "profileImageUrl": profileImage.asset->url,
+    email,
+    githubUrl,
+    whatsappUrl,
+    "cvUrl": cvFile.asset->url
+  }
+`;
