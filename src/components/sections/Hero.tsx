@@ -47,7 +47,7 @@ export default async function Hero() {
               <h1 className="text-5xl font-extrabold leading-[1.1] tracking-tight sm:text-6xl xl:text-7xl">
                 {settings.name.split(" ").slice(0, -1).join(" ") || settings.name}
                 <br />
-                <span className="text-gradient">{settings.name.split(" ").slice(-1).join("")}</span>
+                <span>{settings.name.split(" ").slice(-1).join("")}</span>
               </h1>
 
               <h2 className="pt-2 text-2xl font-bold leading-tight sm:text-3xl xl:text-4xl">

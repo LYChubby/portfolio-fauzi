@@ -12,18 +12,18 @@ const inter = Inter({
 
 export const metadata: Metadata = {
   title: {
-    default: "Fauzi Taufik | Full Stack Developer",
+    default: "Fauzi Taufik | Junior Software & Web Development",
     template: "%s | Fauzi Taufik",
   },
-  description: "Portofolio Fauzi Taufik, Full Stack Developer yang berfokus pada pengembangan aplikasi web dan solusi digital modern.",
-  keywords: ["Fauzi Taufik", "Full Stack Developer", "Web Developer", "Laravel", "Next.js", "Portfolio"],
+  description: "Portofolio Fauzi Taufik, Junior Software & Web Developer yang berfokus pada pengembangan aplikasi web dan solusi digital modern.",
+  keywords: ["Fauzi Taufik", "Junior Software Developer", "Web Developer", "Laravel", "Next.js", "Portfolio"],
   authors: [
     {
       name: "Fauzi Taufik",
     },
   ],
   openGraph: {
-    title: "Fauzi Taufik | Full Stack Developer",
+    title: "Fauzi Taufik | Junior Software & Web Development",
     description: "Portofolio profesional Fauzi Taufik.",
     type: "website",
     locale: "id_ID",
