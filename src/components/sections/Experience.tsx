@@ -3,20 +3,7 @@ import ExperienceList from "./ExperienceList";
 
 import { client } from "@/lib/sanity.client";
 import { experienceQuery } from "@/lib/sanity.queries";
-
-type ExperienceItem = {
-  _id: string;
-  position: string;
-  company: string;
-  category: "work" | "organization";
-  description: string;
-  responsibilities?: string[];
-  technologies?: string[];
-  startDate?: string;
-  endDate?: string;
-  isCurrent?: boolean;
-  order?: number;
-};
+import type { ExperienceItem } from "@/types/experiences";
 
 function formatDate(date?: string) {
   if (!date) return "";

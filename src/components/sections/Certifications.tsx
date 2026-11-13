@@ -1,15 +1,7 @@
 import { client } from "@/lib/sanity.client";
 import { certificationQuery } from "@/lib/sanity.queries";
 import CertificationGrid from "./CertificationGrid";
-
-type Certification = {
-  _id: string;
-  name: string;
-  issuer: string;
-  issueDate: string;
-  credentialNumber?: string;
-  credentialUrl?: string;
-};
+import type { Certification } from "@/types/certifications";
 
 export default async function Certifications() {
   const certifications: Certification[] = await client.fetch(certificationQuery, {}, { next: { revalidate: 60 } });

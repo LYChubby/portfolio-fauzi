@@ -1,13 +1,6 @@
 import { client } from "@/lib/sanity.client";
 import { techStackQuery } from "@/lib/sanity.queries";
-
-type TechCategory = {
-  _id: string;
-  category: string;
-  description: string;
-  technologies: string[];
-  order: number;
-};
+import type { TechCategory } from "@/types/techStacks";
 
 export default async function TechStack() {
   const techCategories: TechCategory[] = await client.fetch(techStackQuery, {}, { next: { revalidate: 60 } });

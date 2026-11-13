@@ -1,18 +1,7 @@
 import { client } from "@/lib/sanity.client";
 import { projectQuery } from "@/lib/sanity.queries";
 import ProjectGrid from "./ProjectGrid";
-
-type Project = {
-  _id: string;
-  title: string;
-  category: string;
-  description: string;
-  thumbnailUrl?: string;
-  technologies?: string[];
-  githubUrl?: string;
-  demoUrl?: string;
-  featured?: boolean;
-};
+import type { Project } from "@/types/projects";
 
 export default async function Projects() {
   const projects: Project[] = await client.fetch(projectQuery, {}, { next: { revalidate: 60 } });

@@ -2,18 +2,7 @@
 
 import { useState } from "react";
 import { ArrowUpRight, Box, ChevronDown, ChevronUp, Code2, GitBranch, Ticket, TrendingUp, type LucideIcon } from "lucide-react";
-
-type Project = {
-  _id: string;
-  title: string;
-  category: string;
-  description: string;
-  thumbnailUrl?: string;
-  technologies?: string[];
-  githubUrl?: string;
-  demoUrl?: string;
-  featured?: boolean;
-};
+import type { Project } from "@/types/projects";
 
 const INITIAL_PROJECTS = 6;
 
